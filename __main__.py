@@ -24,6 +24,7 @@ def process_cmd(cmd):
 
 while 1:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((TCP_IP, TCP_PORT))
     s.listen(1)
     print('PYTHON: listening at {}:{}'.format(TCP_IP, TCP_PORT))
@@ -35,4 +36,3 @@ while 1:
         data = str(data).rstrip('\n')
         print('PYTHON: received: ', data)
         conn.send(str(process_cmd(data)))
-
